@@ -25,12 +25,12 @@ pipeline {
             }
         }
         stage('SonarQube Analysis') {
-    steps {
-        withSonarQubeEnv('SonarQube') {
-            sh 'sonar-scanner -Dsonar.projectKey=my-nodejs-project'
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=my-nodejs-project"
+                }
+            }
         }
-    }
-}
         stage('Quality Gate') {
             steps {
                 script {
@@ -55,8 +55,8 @@ pipeline {
                 nexusUrl: "${NEXUS_URL}",
                 repository: "${NEXUS_REPO}",
                 version: '1.0.0',
-                nexusVersion: 'nexus3',    // Added nexusVersion parameter
-                protocol: 'http'            // Added protocol parameter
+                nexusVersion: 'nexus3',
+                protocol: 'http'
             }
         }
     }
