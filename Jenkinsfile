@@ -1,12 +1,13 @@
 pipeline {
     agent any
     environment {
-        NODEJS_HOME = tool name: 'NodeJS'
+        NODEJS_HOME = tool name: 'NodeJS'                      // Configured NodeJS tool in Jenkins
         PATH = "${NODEJS_HOME}/bin:${env.PATH}"
-        SONARQUBE_SERVER = 'SonarQube'
-        NEXUS_URL = 'http://localhost:8081'
-        NEXUS_REPO = 'your-nexus-repository-id'
-        NEXUS_CREDENTIALS_ID = 'nexus-credentials-id'
+        SONARQUBE_SERVER = 'SonarQube'                         // Configured SonarQube server name in Jenkins
+        SONARQUBE_SCANNER_HOME = tool name: 'SonarQubeScanner' // Configured SonarQube scanner tool in Jenkins
+        NEXUS_URL = 'http://localhost:8081'                    // Nexus server URL
+        NEXUS_REPO = 'nodejs-artifacts'                        // Nexus repository ID you created
+        NEXUS_CREDENTIALS_ID = 'squ_723830da8e4e1602a01fb86fbe42b8d5e638a4be'          // Jenkins credentials ID for Nexus
     }
     stages {
         stage('Checkout') {

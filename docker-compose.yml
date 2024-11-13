@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   jenkins:
     image: jenkins/jenkins:lts
@@ -7,6 +9,9 @@ services:
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
+    environment:
+      JENKINS_OPTS: --httpPort=8080
+
   sonarqube:
     image: sonarqube:latest
     container_name: sonarqube
@@ -18,6 +23,7 @@ services:
       SONARQUBE_JDBC_PASSWORD: sonar
     depends_on:
       - db
+
   db:
     image: postgres:latest
     container_name: postgres
@@ -25,6 +31,7 @@ services:
       POSTGRES_USER: sonar
       POSTGRES_PASSWORD: sonar
       POSTGRES_DB: sonar
+
   nexus:
     image: sonatype/nexus3:latest
     container_name: nexus
@@ -32,6 +39,7 @@ services:
       - "8081:8081"
     volumes:
       - nexus-data:/nexus-data
+
 volumes:
   jenkins_home:
   nexus-data:
