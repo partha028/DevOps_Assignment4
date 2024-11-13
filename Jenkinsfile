@@ -54,7 +54,9 @@ pipeline {
                 groupId: 'com.example',
                 nexusUrl: "${NEXUS_URL}",
                 repository: "${NEXUS_REPO}",
-                version: '1.0.0'
+                version: '1.0.0',
+                nexusVersion: 'nexus3',    // Added nexusVersion parameter
+                protocol: 'http'            // Added protocol parameter
             }
         }
     }
