@@ -26,12 +26,12 @@ pipeline {
             }
         }
         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner -Dsonar.projectKey=my-nodejs-project -X'
-                }
+        steps {
+            withSonarQubeEnv('SonarQube') {
+                sh 'sonar-scanner -Dsonar.projectKey=my-nodejs-project -X'
             }
         }
+    }
 
         stage('Quality Gate') {
             steps {
